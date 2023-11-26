@@ -42,8 +42,13 @@ def describe_tables(table_names):
     return "\n".join(r[0] for r in rows if r[0] is not None)
 
 
+class DescribeTablesArgsSchema(BaseModel):
+    table_names: List[str]
+
+
 describe_tables_tool = Tool.from_function(
     name="describe_tables",
     description="Given a list of table names, returns the schema of those tables.",
-    func=describe_tables
+    func=describe_tables,
+    args_schema=DescribeTablesArgsSchema
 )
