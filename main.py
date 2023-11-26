@@ -49,7 +49,7 @@ agent = OpenAIFunctionsAgent(
 agent_executor = AgentExecutor(
     agent=agent,
     tools=tools,
-    verbose=True,
+    # verbose=True,
     memory=memory
 )
 
