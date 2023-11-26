@@ -8,6 +8,7 @@ from langchain.schema import SystemMessage
 from langchain.agents import OpenAIFunctionsAgent, AgentExecutor
 from dotenv import load_dotenv
 from tools.sql import list_tables, run_query_tool, describe_tables_tool
+from tools.report import write_report_tool
 
 load_dotenv()
 
@@ -28,7 +29,7 @@ prompt = ChatPromptTemplate(
     ]
 )
 
-tools = [run_query_tool, describe_tables_tool]
+tools = [run_query_tool, describe_tables_tool, write_report_tool]
 
 agent = OpenAIFunctionsAgent(
     llm=chat,
@@ -43,4 +44,5 @@ agent_executor = AgentExecutor(
 )
 
 
-agent_executor("How many users have provided a shipping address?")
+agent_executor(
+    "How many orders are there? Write the results to a report file")
